@@ -1,0 +1,112 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Service Fusion
+providerId: servicefusion
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Field Service Management
+- FSM
+- Home Services
+- Contractors
+- Plans
+- Pricing
+description: >-
+  Service Fusion sells the field service management application on three
+  flat-rate subscription tiers - Starter, Plus, and Pro - each with unlimited
+  users (technicians, dispatchers, and office staff) rather than per-seat
+  pricing. Published third-party prices (Service Fusion does not list prices on
+  its own site) put annual billing at roughly $208/month for Starter,
+  $324/month for Plus, and $533/month for Pro, with a discount for annual
+  commitment versus month-to-month. The Open API is a Pro-plan feature - API
+  access is only included on the Pro tier. There is no separately metered API
+  fee; API usage is governed by the platform rate limit (~60 requests/minute)
+  rather than an additional charge.
+notes: >-
+  Prices are drawn from third-party review sites and vary because Service Fusion
+  does not publish list pricing; confirm current numbers and included features
+  with Service Fusion sales. The key API fact to reconcile is that API access is
+  bundled into the Pro plan, not sold as a standalone product.
+sources:
+- https://www.servicefusion.com/pricing
+- https://www.servicefusion.com/
+- https://docs.servicefusion.com/
+plans:
+- id: servicefusion-starter
+  name: Starter
+  type: paid
+  description: >-
+    Entry tier with core FSM essentials - customer management, estimates,
+    scheduling and dispatch, invoicing, and QuickBooks integration - with
+    unlimited users. Does not include Open API access.
+  entries:
+  - label: Starter Subscription
+    name: starter_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~208 (USD/month, billed annually; unlimited users)
+    userMultiplied: false
+  elements:
+  - name: Customer Management
+  - name: Estimates and Invoicing
+  - name: Scheduling and Dispatch
+  - name: QuickBooks Integration
+  - name: Unlimited Users
+- id: servicefusion-plus
+  name: Plus
+  type: paid
+  description: >-
+    Mid tier adding job costing, photo uploads, inventory management, and
+    integrated communication tools on top of Starter, with unlimited users.
+    Does not include Open API access.
+  entries:
+  - label: Plus Subscription
+    name: plus_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~324 (USD/month, billed annually; unlimited users)
+    userMultiplied: false
+  elements:
+  - name: Everything in Starter
+  - name: Job Costing
+  - name: Inventory Management
+  - name: Photo Uploads
+  - name: Integrated Communication
+- id: servicefusion-pro
+  name: Pro
+  type: paid
+  description: >-
+    Top tier including everything in Starter and Plus plus eSignatures, customer
+    web portals, custom documents, recurring invoicing, and - notably - Open API
+    access. This is the plan required to use the Service Fusion API.
+  entries:
+  - label: Pro Subscription
+    name: pro_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~533 (USD/month, billed annually; unlimited users)
+    userMultiplied: false
+  elements:
+  - name: Everything in Plus
+  - name: Open API Access
+  - name: eSignatures
+  - name: Customer Web Portal
+  - name: Custom Documents
+  - name: Recurring Invoicing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,123 @@
+aid: servicefusion
+name: Service Fusion
+review:
+  question: Does Service Fusion expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Service Fusion's Open API is
+    request/response REST over HTTPS (base https://api.servicefusion.com/v1)
+    secured with OAuth 2.0. There is no server-push transport - no WebSocket,
+    no Server-Sent Events, and, per third-party tooling, no native webhook
+    support - on Service Fusion's own API to model. Clients obtain current data
+    by polling the REST list/retrieve endpoints.
+findings:
+  summary: |
+    Service Fusion does not publish a documented public WebSocket API. Service
+    Fusion is field service management (FSM) software for home-service
+    contractors (HVAC, plumbing, electrical, appliance repair). Its Open API is
+    a REST/JSON interface at base https://api.servicefusion.com/v1, secured with
+    OAuth 2.0 - access tokens are issued at
+    https://api.servicefusion.com/oauth/access_token via the authorization_code
+    (Connected Apps) or client_credentials grant and sent as a Bearer token. The
+    API is available on the Pro plan and is rate limited to roughly 60 requests
+    per minute (HTTP 429 when exceeded). In practice the public API is
+    read-and-create oriented - list (GET), retrieve (GET), and create (POST) are
+    the reliably available operations; PUT/PATCH/DELETE are not consistently
+    exposed. There is no realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint, no SSE, and no documented native webhook system.
+  productType: Field service management (FSM) SaaS for home-service contractors.
+  apiConfirmed: true
+  authentication: |
+    OAuth 2.0. Register a Connected App under My Office > Developer Settings >
+    Connected Apps to obtain a Client ID and Client Secret. Exchange for an
+    access token at https://api.servicefusion.com/oauth/access_token
+    (authorization_code or client_credentials grant); send the token as an
+    Authorization: Bearer header. API access requires the Pro subscription tier.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.servicefusion.com/v1
+      documented: true
+      note: Request/response JSON over HTTPS. OAuth 2.0 Bearer auth. ~60 requests/minute.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Service Fusion Open API as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming surface is documented.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: No native webhook/callback support is documented; third-party tooling notes its absence. Change data is obtained by polling REST.
+  endpointsConfirmed:
+    - note: >-
+        Documented Service Fusion API resource areas (per docs.servicefusion.com
+        reference sections and consuming tools): customers, jobs, estimates,
+        invoices, and techs, plus reference lookups (job statuses, job
+        categories, sources) and customer-nested equipment. Reliable operations
+        are list (GET), retrieve (GET), and create (POST).
+    - GET  https://api.servicefusion.com/v1/customers
+    - POST https://api.servicefusion.com/v1/customers
+    - GET  https://api.servicefusion.com/v1/customers/{id}
+    - GET  https://api.servicefusion.com/v1/jobs
+    - POST https://api.servicefusion.com/v1/jobs
+    - GET  https://api.servicefusion.com/v1/jobs/{id}
+    - GET  https://api.servicefusion.com/v1/estimates
+    - POST https://api.servicefusion.com/v1/estimates
+    - GET  https://api.servicefusion.com/v1/invoices
+    - POST https://api.servicefusion.com/v1/invoices
+    - GET  https://api.servicefusion.com/v1/techs
+  endpointsModeled:
+    - note: >-
+        Modeled from the Service Fusion FSM data model and the platform's
+        read-and-create API conventions; exact paths, fields, and available
+        methods should be verified against https://docs.servicefusion.com/.
+    - GET  https://api.servicefusion.com/v1/customers/{id}/contacts
+    - POST https://api.servicefusion.com/v1/customers/{id}/contacts
+    - GET  https://api.servicefusion.com/v1/estimates/{id}
+    - GET  https://api.servicefusion.com/v1/invoices/{id}
+    - GET  https://api.servicefusion.com/v1/products
+    - POST https://api.servicefusion.com/v1/products
+    - GET  https://api.servicefusion.com/v1/services
+    - POST https://api.servicefusion.com/v1/services
+    - GET  https://api.servicefusion.com/v1/payments
+    - POST https://api.servicefusion.com/v1/payments
+    - GET  https://api.servicefusion.com/v1/techs/{id}
+    - GET  https://api.servicefusion.com/v1/calendar-tasks
+    - POST https://api.servicefusion.com/v1/calendar-tasks
+  knownIssues:
+    - The /jobs list endpoint hangs indefinitely when queried without a sort parameter; always pass sort (e.g. sort=-start_date).
+    - No sandbox environment is offered; testing occurs against a live account.
+  sources:
+    - url: https://docs.servicefusion.com/
+      type: Documentation
+      note: Official Service Fusion API reference (customers, jobs, estimates, invoices, techs, data types, authentication, known issues). All REST; no WebSocket.
+    - url: https://servicefusion.zendesk.com/hc/en-us/articles/360039138891-Open-API-Integration-Connected-Apps-Authorization-Code-Grant
+      type: Documentation
+      note: OAuth 2.0 Connected Apps setup - authorization_code grant, Client ID/Secret via Developer Settings.
+    - url: https://www.servicefusion.com/pricing
+      type: Pricing
+      note: Flat-rate Starter/Plus/Pro tiers, unlimited users; API access is a Pro-plan feature.
+    - url: https://www.integrate.io/blog/deep-dive-into-the-service-fusion-api/
+      type: Analysis
+      note: Confirms REST/JSON, Pro-plan API access, and CRUD entities (customers, jobs, estimates, invoices, technicians, inventory).
+    - url: https://glama.ai/mcp/servers/commair-tools/mcp-servicefusion-public
+      type: Tooling
+      note: Community MCP server documenting base URL, token endpoint, ~60 req/min limit, read-and-create-only surface, and the /jobs sort hang.
+  transportNote: |
+    Service Fusion's own public API is request/response REST secured with OAuth
+    2.0. No WebSocket, SSE, or native webhook transport is documented. Any
+    realtime behavior in an integration is achieved by polling the REST API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and Service Fusion's own public API is
+    request/response REST (OAuth 2.0 Bearer). No AsyncAPI document was created
+    because there is no server-push transport - no WebSocket, no SSE, and no
+    documented native webhook - on Service Fusion's API to model.

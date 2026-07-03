@@ -1,0 +1,251 @@
+{
+  "info": {
+    "name": "Service Fusion Open API",
+    "description": "REST/JSON interface to Service Fusion field service management software. Base URL: https://api.servicefusion.com/v1. Authenticate with OAuth 2.0 - obtain an access token from https://api.servicefusion.com/oauth/access_token (authorization_code or client_credentials grant) and send it as a Bearer token. API access requires the Pro plan and is rate limited to ~60 requests/minute. The public API is read-and-create oriented (list, retrieve, create). Customers, jobs, estimates, invoices, and techs are documented resources; contacts, products, services, payments, and calendar tasks are modeled from the Service Fusion data model - verify against https://docs.servicefusion.com/.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.servicefusion.com/v1", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "List customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers?sort=customer_name&page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["customers"], "query": [{ "key": "sort", "value": "customer_name" }, { "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists customer accounts with filtering, sorting, and pagination."
+          }
+        },
+        {
+          "name": "Create a customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customer_name\": \"Acme Property Management\",\n  \"phones\": [{ \"phone\": \"555-123-4567\", \"type\": \"office\" }],\n  \"emails\": [\"billing@acme.example\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] },
+            "description": "Creates a new customer account."
+          }
+        },
+        {
+          "name": "Retrieve a customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers/:id", "host": ["{{baseUrl}}"], "path": ["customers", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single customer by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "List a customer's contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers/:id/contacts", "host": ["{{baseUrl}}"], "path": ["customers", ":id", "contacts"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Lists contacts and service locations for a customer."
+          }
+        },
+        {
+          "name": "Add a contact to a customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"fname\": \"Jordan\",\n  \"lname\": \"Rivera\",\n  \"contact_type\": \"site\",\n  \"phone\": \"555-987-6543\",\n  \"email\": \"jordan@acme.example\"\n}" },
+            "url": { "raw": "{{baseUrl}}/customers/:id/contacts", "host": ["{{baseUrl}}"], "path": ["customers", ":id", "contacts"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Creates a contact under the given customer account."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "List jobs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/jobs?sort=-start_date&page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["jobs"], "query": [{ "key": "sort", "value": "-start_date" }, { "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists jobs. Always pass a sort parameter - unsorted /jobs list queries are known to hang."
+          }
+        },
+        {
+          "name": "Create a job",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customer_name\": \"Acme Property Management\",\n  \"description\": \"HVAC maintenance visit\",\n  \"category\": \"Maintenance\",\n  \"start_date\": \"2026-07-10T09:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/jobs", "host": ["{{baseUrl}}"], "path": ["jobs"] },
+            "description": "Creates a new job (work order)."
+          }
+        },
+        {
+          "name": "Retrieve a job",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/jobs/:id", "host": ["{{baseUrl}}"], "path": ["jobs", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single job by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estimates",
+      "item": [
+        {
+          "name": "List estimates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/estimates?page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["estimates"], "query": [{ "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists estimates (quotes)."
+          }
+        },
+        {
+          "name": "Create an estimate",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customer_name\": \"Acme Property Management\",\n  \"line_items\": [{ \"name\": \"Diagnostic\", \"quantity\": 1, \"unit_price\": 95 }]\n}" },
+            "url": { "raw": "{{baseUrl}}/estimates", "host": ["{{baseUrl}}"], "path": ["estimates"] },
+            "description": "Creates a new estimate with line items."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "List invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/invoices?filters[status]=open&page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["invoices"], "query": [{ "key": "filters[status]", "value": "open" }, { "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists invoices; filter by status=open for outstanding accounts receivable."
+          }
+        },
+        {
+          "name": "Create an invoice",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"customer_name\": \"Acme Property Management\",\n  \"line_items\": [{ \"name\": \"Labor\", \"quantity\": 2, \"unit_price\": 120 }]\n}" },
+            "url": { "raw": "{{baseUrl}}/invoices", "host": ["{{baseUrl}}"], "path": ["invoices"] },
+            "description": "Creates a new invoice."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products and Services",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/products?page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["products"], "query": [{ "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists catalog products (parts and inventory items)."
+          }
+        },
+        {
+          "name": "List services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/services?page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["services"], "query": [{ "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists catalog services (labor and flat-rate tasks)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "List payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/payments?page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["payments"], "query": [{ "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists payments recorded against invoices."
+          }
+        },
+        {
+          "name": "Record a payment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"invoice_id\": \"\",\n  \"amount\": 240,\n  \"method\": \"card\",\n  \"date\": \"2026-07-11\"\n}" },
+            "url": { "raw": "{{baseUrl}}/payments", "host": ["{{baseUrl}}"], "path": ["payments"] },
+            "description": "Records a payment applied to an invoice."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Techs and Users",
+      "item": [
+        {
+          "name": "List techs and users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/techs?page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["techs"], "query": [{ "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists the technicians and users in the account."
+          }
+        },
+        {
+          "name": "Retrieve a tech",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/techs/:id", "host": ["{{baseUrl}}"], "path": ["techs", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single technician or user by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calendar Tasks",
+      "item": [
+        {
+          "name": "List calendar tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/calendar-tasks?page=1&per-page=25", "host": ["{{baseUrl}}"], "path": ["calendar-tasks"], "query": [{ "key": "page", "value": "1" }, { "key": "per-page", "value": "25" }] },
+            "description": "Lists non-job calendar tasks such as reminders and follow-ups."
+          }
+        },
+        {
+          "name": "Create a calendar task",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Follow up on estimate\",\n  \"start_date\": \"2026-07-12T13:00:00Z\",\n  \"assigned_to\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/calendar-tasks", "host": ["{{baseUrl}}"], "path": ["calendar-tasks"] },
+            "description": "Creates a new calendar task."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+aid: servicefusion
+url: https://raw.githubusercontent.com/api-evangelist/servicefusion/refs/heads/main/apis.yml
+name: Service Fusion
+kind: company
+description: Service Fusion is field service management (FSM) software for home-service
+  contractors - HVAC, plumbing, electrical, appliance repair, and similar trades. It
+  covers customer management, estimates, scheduling and dispatch, work orders/jobs,
+  invoicing, payments, inventory, and a technician mobile app, with flat-rate pricing
+  and unlimited users on every plan. Service Fusion exposes an Open API - a REST/JSON
+  interface secured with OAuth 2.0 (base https://api.servicefusion.com/v1, token
+  endpoint https://api.servicefusion.com/oauth/access_token) - that lets developers
+  read and create records for customers, jobs, estimates, invoices, technicians, and
+  related resources. API access is available on the Pro plan; the API is rate limited
+  to roughly 60 requests per minute.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Field Service Management
+- FSM
+- Home Services
+- Contractors
+- Scheduling
+- Dispatch
+- Invoicing
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: servicefusion:servicefusion-customers-api
+  name: Service Fusion Customers API
+  tags:
+  - Customers
+  - CRM
+  - Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: https://docs.servicefusion.com/
+    type: APIReference
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: List, search, retrieve, and create customer accounts - the businesses
+    and homeowners a contractor serves - including addresses, phone/email contacts,
+    and custom fields. Customer records anchor jobs, estimates, invoices, and payments.
+- aid: servicefusion:servicefusion-contacts-api
+  name: Service Fusion Contacts API
+  tags:
+  - Contacts
+  - People
+  - CRM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: Manage the individual contacts and service locations attached to a
+    customer account - names, roles, phone numbers, emails, and site addresses used
+    for scheduling and communication.
+- aid: servicefusion:servicefusion-jobs-api
+  name: Service Fusion Jobs API
+  tags:
+  - Jobs
+  - Work Orders
+  - Dispatch
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: https://docs.servicefusion.com/
+    type: APIReference
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: List, search, retrieve, and create jobs (work orders) - the scheduled
+    service visits assigned to technicians. Supports filtering by status, customer,
+    and date range. Note - list queries should always pass a sort parameter (e.g.
+    sort=-start_date) to avoid a known hang on unsorted /jobs requests.
+- aid: servicefusion:servicefusion-estimates-api
+  name: Service Fusion Estimates API
+  tags:
+  - Estimates
+  - Quotes
+  - Sales
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: https://docs.servicefusion.com/
+    type: APIReference
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, and create estimates (quotes) presented to customers
+    before work begins, including line items for products and services, pricing, and
+    status. Approved estimates convert into jobs and invoices.
+- aid: servicefusion:servicefusion-invoices-api
+  name: Service Fusion Invoices API
+  tags:
+  - Invoices
+  - Billing
+  - Accounts Receivable
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: https://docs.servicefusion.com/
+    type: APIReference
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, and create invoices billed to customers for completed
+    work, including line items, totals, balance due, and payment status. Includes an
+    open-invoices view for outstanding accounts receivable.
+- aid: servicefusion:servicefusion-products-services-api
+  name: Service Fusion Products and Services API
+  tags:
+  - Products
+  - Services
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: Manage the catalog of products (inventory items and parts) and services
+    (labor and flat-rate tasks) used as line items on estimates, jobs, and invoices,
+    including names, descriptions, pricing, and cost.
+- aid: servicefusion:servicefusion-payments-api
+  name: Service Fusion Payments API
+  tags:
+  - Payments
+  - Transactions
+  - Billing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, and record payments applied to invoices - amount,
+    method, date, and the invoice or customer the payment settles - for reconciling
+    accounts receivable.
+- aid: servicefusion:servicefusion-techs-users-api
+  name: Service Fusion Techs and Users API
+  tags:
+  - Technicians
+  - Users
+  - Workforce
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: https://docs.servicefusion.com/
+    type: APIReference
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: Retrieve the roster of technicians and users in the account - the field
+    workforce jobs are assigned to and dispatched against - including names, contact
+    details, and identifiers used when scheduling jobs.
+- aid: servicefusion:servicefusion-calendar-tasks-api
+  name: Service Fusion Calendar Tasks API
+  tags:
+  - Calendar
+  - Tasks
+  - Scheduling
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.servicefusion.com/
+  baseURL: https://api.servicefusion.com/v1
+  properties:
+  - url: https://docs.servicefusion.com/
+    type: Documentation
+  - url: openapi/servicefusion-openapi.yml
+    type: OpenAPI
+  - url: collections/servicefusion.postman_collection.json
+    type: PostmanCollection
+  - url: collections/servicefusion.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, and create calendar tasks - non-job scheduled items
+    such as reminders, follow-ups, and internal to-dos placed on the dispatch
+    calendar and optionally assigned to a technician or user.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/service-fusion
+- type: Website
+  url: https://www.servicefusion.com
+- type: Documentation
+  url: https://docs.servicefusion.com/
+- type: Plans
+  url: plans/servicefusion-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/servicefusion-rate-limits.yml
+- type: FinOps
+  url: finops/servicefusion-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

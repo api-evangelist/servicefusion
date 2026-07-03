@@ -1,0 +1,83 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Service Fusion
+providerId: servicefusion
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Field Service Management
+- FSM
+- Home Services
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Service Fusion spend. Service Fusion is a flat-rate SaaS
+  subscription, not usage-metered - cost is the monthly (or annual) plan fee for
+  one of three tiers (Starter, Plus, Pro), each with unlimited users, so spend
+  does not scale with technician headcount or the number of jobs, estimates, or
+  invoices processed. The Open API carries no separate per-call charge; it is a
+  feature bundled into the Pro plan and is governed by a rate limit (~60
+  requests/minute) rather than metered billing. The relevant FinOps decisions
+  are therefore tier selection (does the organization need Pro-only capabilities
+  such as API access, eSignatures, and customer portals) and annual-versus-
+  monthly commitment, not per-unit consumption optimization.
+notes: >-
+  Because pricing is flat-rate and unlimited-user, the dominant cost lever is
+  choosing the right tier and billing term, not reducing API call volume. If API
+  access is required, the organization must be on the Pro plan; there is no way
+  to buy the API separately. Confirm current tier prices with Service Fusion, as
+  list pricing is not published on their site.
+sources:
+- https://www.servicefusion.com/pricing
+- https://www.servicefusion.com/
+- https://docs.servicefusion.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Service Fusion
+serviceCategory: Field Service Management Software
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly or Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+meters:
+- name: subscription_tier
+  description: Flat-rate monthly/annual subscription fee for the selected plan (Starter, Plus, or Pro).
+  unit: subscription
+  aggregation: flat
+  dimensions:
+  - account
+  - plan
+- name: users
+  description: Number of users is unlimited on every plan and does not affect the subscription fee.
+  unit: users
+  aggregation: max
+  dimensions:
+  - account
+- name: api_requests
+  description: Open API requests are not billed per call; usage is governed by the rate limit, and API access is bundled into the Pro plan.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track which subscription tier the organization is on and whether Pro-only features (API access, eSignatures, portals) are actually used to justify the tier.
+- name: Allocation
+  description: With unlimited flat-rate users, allocate the single subscription fee across departments by usage share rather than by seat count.
+- name: Optimization
+  description: Right-size the plan tier and prefer annual billing for the discount; API call volume does not drive cost, so optimize for correctness and rate-limit compliance rather than call reduction.
+- name: Accountability
+  description: Assign an owner for the Service Fusion subscription and review tier fit at renewal against the features actually consumed.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

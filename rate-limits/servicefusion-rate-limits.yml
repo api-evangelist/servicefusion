@@ -1,0 +1,67 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Service Fusion
+providerId: servicefusion
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Field Service Management
+- FSM
+- Home Services
+- Rate Limiting
+- Quotas
+description: >-
+  The Service Fusion Open API enforces a request-rate limit of approximately 60
+  requests per minute per account. Exceeding it returns HTTP 429; clients should
+  honor Retry-After and back off. The API is available only on the Pro plan.
+  Beyond the request cap, two operational constraints matter: list responses are
+  paginated (pass page and per-page), and the /jobs list endpoint is known to
+  hang when queried without a sort parameter, so all /jobs list requests should
+  include a sort (for example sort=-start_date). The public API is
+  read-and-create oriented - list, retrieve, and create are the reliably
+  available operations - so there is limited update/delete surface to rate
+  against.
+notes: >-
+  The ~60 requests/minute figure is reported by API consumers and tooling rather
+  than a prominently published numeric SLA; confirm the exact limit and any
+  burst allowance in the live documentation at https://docs.servicefusion.com/.
+  There is no separate metered API fee - usage is governed by this rate limit,
+  not by per-call billing.
+sources:
+- https://docs.servicefusion.com/
+- https://www.servicefusion.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: ~60 per minute
+  notes: Approximate per-account request-rate limit on the Open API; exceeding it returns 429.
+- name: Pagination Page Size
+  scope: request
+  metric: records
+  limit: per-page (bounded page size)
+  notes: List endpoints are paginated via page and per-page query parameters.
+- name: Jobs List Sort Requirement
+  scope: endpoint
+  metric: requests
+  limit: sort parameter required
+  notes: Unsorted /jobs list queries are known to hang; always pass a sort (e.g. sort=-start_date).
+- name: Plan Gating
+  scope: account
+  metric: access
+  limit: Pro plan only
+  notes: API access is included only on the Service Fusion Pro subscription tier.
+policies:
+- name: Backoff Strategy
+  description: On HTTP 429, honor the Retry-After header and apply exponential backoff with jitter before retrying.
+- name: Pagination
+  description: Iterate list results using page and per-page rather than requesting unbounded result sets.
+- name: Read and Create Oriented
+  description: The public API reliably supports list (GET), retrieve (GET), and create (POST); update (PUT) and delete (DELETE) are not consistently exposed.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

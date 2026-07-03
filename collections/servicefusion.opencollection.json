@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Service Fusion Open API",
+    "version": "1.0",
+    "description": "REST/JSON interface to Service Fusion field service management software. Base URL https://api.servicefusion.com/v1, OAuth 2.0 Bearer auth (token endpoint https://api.servicefusion.com/oauth/access_token). Pro plan only; ~60 requests/minute. Read-and-create oriented. Customers, jobs, estimates, invoices, and techs are documented; contacts, products, services, payments, and calendar tasks are modeled - verify at https://docs.servicefusion.com/."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Customers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List customers", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/customers?sort=customer_name&page=1&per-page=25" },
+          "docs": "Lists customer accounts with filtering, sorting, and pagination."
+        },
+        {
+          "info": { "name": "Create a customer", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/customers", "body": { "type": "json", "data": "{\"customer_name\":\"Acme Property Management\",\"emails\":[\"billing@acme.example\"]}" } },
+          "docs": "Creates a new customer account."
+        },
+        {
+          "info": { "name": "Retrieve a customer", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/customers/:id", "params": [{ "name": "id", "value": "", "type": "path", "description": "Customer ID." }] },
+          "docs": "Retrieves a single customer by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Contacts", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List a customer's contacts", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/customers/:id/contacts", "params": [{ "name": "id", "value": "", "type": "path", "description": "Customer ID." }] },
+          "docs": "Lists contacts and service locations for a customer."
+        },
+        {
+          "info": { "name": "Add a contact to a customer", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/customers/:id/contacts", "params": [{ "name": "id", "value": "", "type": "path", "description": "Customer ID." }], "body": { "type": "json", "data": "{\"fname\":\"Jordan\",\"lname\":\"Rivera\",\"contact_type\":\"site\"}" } },
+          "docs": "Creates a contact under the given customer account."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Jobs", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List jobs", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/jobs?sort=-start_date&page=1&per-page=25" },
+          "docs": "Lists jobs. Always pass a sort parameter - unsorted /jobs list queries are known to hang."
+        },
+        {
+          "info": { "name": "Create a job", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/jobs", "body": { "type": "json", "data": "{\"customer_name\":\"Acme Property Management\",\"description\":\"HVAC maintenance visit\",\"start_date\":\"2026-07-10T09:00:00Z\"}" } },
+          "docs": "Creates a new job (work order)."
+        },
+        {
+          "info": { "name": "Retrieve a job", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/jobs/:id", "params": [{ "name": "id", "value": "", "type": "path", "description": "Job ID." }] },
+          "docs": "Retrieves a single job by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Estimates", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List estimates", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/estimates?page=1&per-page=25" },
+          "docs": "Lists estimates (quotes)."
+        },
+        {
+          "info": { "name": "Create an estimate", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/estimates", "body": { "type": "json", "data": "{\"customer_name\":\"Acme Property Management\",\"line_items\":[{\"name\":\"Diagnostic\",\"quantity\":1,\"unit_price\":95}]}" } },
+          "docs": "Creates a new estimate with line items."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Invoices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List invoices", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/invoices?filters[status]=open&page=1&per-page=25" },
+          "docs": "Lists invoices; filter by status=open for outstanding accounts receivable."
+        },
+        {
+          "info": { "name": "Create an invoice", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/invoices", "body": { "type": "json", "data": "{\"customer_name\":\"Acme Property Management\",\"line_items\":[{\"name\":\"Labor\",\"quantity\":2,\"unit_price\":120}]}" } },
+          "docs": "Creates a new invoice."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Products and Services", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List products", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/products?page=1&per-page=25" },
+          "docs": "Lists catalog products (parts and inventory items)."
+        },
+        {
+          "info": { "name": "List services", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/services?page=1&per-page=25" },
+          "docs": "Lists catalog services (labor and flat-rate tasks)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Payments", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List payments", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/payments?page=1&per-page=25" },
+          "docs": "Lists payments recorded against invoices."
+        },
+        {
+          "info": { "name": "Record a payment", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/payments", "body": { "type": "json", "data": "{\"invoice_id\":\"\",\"amount\":240,\"method\":\"card\",\"date\":\"2026-07-11\"}" } },
+          "docs": "Records a payment applied to an invoice."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Techs and Users", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List techs and users", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/techs?page=1&per-page=25" },
+          "docs": "Lists the technicians and users in the account."
+        },
+        {
+          "info": { "name": "Retrieve a tech", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/techs/:id", "params": [{ "name": "id", "value": "", "type": "path", "description": "Tech/User ID." }] },
+          "docs": "Retrieves a single technician or user by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Calendar Tasks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List calendar tasks", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.servicefusion.com/v1/calendar-tasks?page=1&per-page=25" },
+          "docs": "Lists non-job calendar tasks such as reminders and follow-ups."
+        },
+        {
+          "info": { "name": "Create a calendar task", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.servicefusion.com/v1/calendar-tasks", "body": { "type": "json", "data": "{\"title\":\"Follow up on estimate\",\"start_date\":\"2026-07-12T13:00:00Z\"}" } },
+          "docs": "Creates a new calendar task."
+        }
+      ]
+    }
+  ]
+}
