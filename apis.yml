@@ -226,6 +226,8 @@ apis:
     such as reminders, follow-ups, and internal to-dos placed on the dispatch
     calendar and optionally assigned to a technician or user.
 common:
+- type: DomainSecurity
+  url: security/servicefusion-domain-security.yml
 - type: Authentication
   url: authentication/servicefusion-authentication.yml
 - type: OAuthScopes
