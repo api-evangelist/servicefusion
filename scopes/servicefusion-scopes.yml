@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/servicefusion-openapi.yml
+docs: https://docs.servicefusion.com/
+note: Service Fusion's OAuth 2.0 implementation (authorization_code and client_credentials
+  grants per the official RAML definition at https://docs.servicefusion.com/, and the
+  Connected Apps guide at https://servicefusion.zendesk.com/hc/en-us/articles/360039138891)
+  does not define or document any scopes; access is controlled per connected app via
+  its client credentials, not via granular OAuth scopes.
+schemes:
+- name: oauth2
+  source: openapi/servicefusion-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+scopes: []

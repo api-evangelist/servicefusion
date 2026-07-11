@@ -226,6 +226,10 @@ apis:
     such as reminders, follow-ups, and internal to-dos placed on the dispatch
     calendar and optionally assigned to a technician or user.
 common:
+- type: Authentication
+  url: authentication/servicefusion-authentication.yml
+- type: OAuthScopes
+  url: scopes/servicefusion-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/service-fusion
 - type: Website
@@ -238,6 +242,8 @@ common:
   url: rate-limits/servicefusion-rate-limits.yml
 - type: FinOps
   url: finops/servicefusion-finops.yml
+- type: Blog
+  url: https://www.servicefusion.com/blog/feed/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
