@@ -1,0 +1,13 @@
+{
+  "repo": "servicefusion",
+  "feeds": [
+    {
+      "source": "https://www.servicefusion.com/blog/feed/",
+      "feed_url": "https://www.servicefusion.com/blog/feed/",
+      "title": "Field Service Management Blog | Service Fusion",
+      "saved": 3
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 13
+}
