@@ -226,6 +226,8 @@ apis:
     such as reminders, follow-ups, and internal to-dos placed on the dispatch
     calendar and optionally assigned to a technician or user.
 common:
+- type: AgenticAccess
+  url: agentic-access/servicefusion-agentic-access.yml
 - type: DomainSecurity
   url: security/servicefusion-domain-security.yml
 - type: Authentication
