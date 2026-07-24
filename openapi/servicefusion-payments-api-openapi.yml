@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: Service Fusion Open Calendar Tasks Payments API
+  description: 'The Service Fusion Open API is a REST/JSON interface to Service Fusion field service management (FSM) software for home-service contractors. It exposes the core operational records - customers and their contacts, jobs (work orders), estimates, invoices, payments, the product/service catalog, technicians, and calendar tasks - over HTTPS. Requests are authenticated with OAuth 2.0; obtain an access token from the token endpoint at https://api.servicefusion.com/oauth/access_token using an authorization_code or client_credentials grant, then send it as a Bearer token. API access is available on the Service Fusion Pro plan and is rate limited to roughly 60 requests per minute.
+
+    Grounding note - customers, jobs, estimates, invoices, and techs are documented resources on the Service Fusion API. Contacts, products, services, payments, and calendar tasks are modeled here from the Service Fusion FSM data model and the platform''s read-and-create API conventions; verify exact paths, fields, and available methods against the live reference at https://docs.servicefusion.com/ before production use. In practice the public API is read-and-create heavy - list (GET), retrieve (GET), and create (POST) are the reliably available operations; update (PUT) and delete (DELETE) are not consistently exposed across resources.'
+  version: '1.0'
+  contact:
+    name: Service Fusion
+    url: https://www.servicefusion.com
+servers:
+- url: https://api.servicefusion.com/v1
+  description: Service Fusion Open API v1
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Payments
+  description: Payments applied against invoices.
+paths:
+  /payments:
+    get:
+      operationId: listPayments
+      tags:
+      - Payments
+      summary: List payments
+      description: Lists payments recorded against invoices.
+      parameters:
+      - $ref: '#/components/parameters/Filters'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of payments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPayment
+      tags:
+      - Payments
+      summary: Record a payment
+      description: Records a payment applied to an invoice.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentInput'
+      responses:
+        '201':
+          description: The recorded payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per-page
+      in: query
+      required: false
+      description: Number of records per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests.
+      schema:
+        type: string
+    Filters:
+      name: filters
+      in: query
+      required: false
+      description: Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields.
+      style: deepObject
+      explode: true
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+  schemas:
+    Pagination:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    PaymentInput:
+      type: object
+      required:
+      - invoice_id
+      - amount
+      properties:
+        invoice_id:
+          type: string
+        amount:
+          type: number
+        method:
+          type: string
+        date:
+          type: string
+          format: date
+    PaymentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        _meta:
+          $ref: '#/components/schemas/Pagination'
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        invoice_id:
+          type: string
+        amount:
+          type: number
+        method:
+          type: string
+        date:
+          type: string
+          format: date
+  responses:
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.servicefusion.com/oauth/authorize
+          tokenUrl: https://api.servicefusion.com/oauth/access_token
+          scopes: {}
+        clientCredentials:
+          tokenUrl: https://api.servicefusion.com/oauth/access_token
+          scopes: {}
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer access token obtained via the OAuth 2.0 token endpoint.
