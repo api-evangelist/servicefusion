@@ -1,0 +1,30 @@
+{
+  "provider": "servicefusion",
+  "sources": [
+    "servicefusion-calendar-tasks-api-openapi.yml",
+    "servicefusion-contacts-api-openapi.yml",
+    "servicefusion-customers-api-openapi.yml",
+    "servicefusion-estimates-api-openapi.yml",
+    "servicefusion-invoices-api-openapi.yml",
+    "servicefusion-jobs-api-openapi.yml",
+    "servicefusion-payments-api-openapi.yml",
+    "servicefusion-products-and-services-api-openapi.yml",
+    "servicefusion-techs-and-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "servicefusion-calendar-tasks-api-openapi.yml",
+    "servicefusion-contacts-api-openapi.yml",
+    "servicefusion-customers-api-openapi.yml",
+    "servicefusion-estimates-api-openapi.yml",
+    "servicefusion-invoices-api-openapi.yml",
+    "servicefusion-jobs-api-openapi.yml",
+    "servicefusion-payments-api-openapi.yml",
+    "servicefusion-products-and-services-api-openapi.yml",
+    "servicefusion-techs-and-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
