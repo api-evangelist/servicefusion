@@ -1,0 +1,473 @@
+{
+  "item": [
+    {
+      "id": "b031f2d7-d728-4e7c-af61-d0f87850c729",
+      "name": "Techs and Users",
+      "description": {
+        "content": "Technicians and users the work is assigned to.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47c2a03c-72c1-4375-8c16-b3e82c288798",
+          "name": "List techs and users",
+          "request": {
+            "name": "List techs and users",
+            "description": {
+              "content": "Lists the technicians and users in the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "techs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filters[key_0]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters[key_1]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters[key_2]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "per-page",
+                  "value": "25",
+                  "description": "Number of records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fd7ed6b-b844-47e4-906d-3a62edff9ffa",
+              "name": "A paginated list of techs and users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "techs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_3]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_4]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per-page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"fname\": \"string\",\n      \"lname\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"role\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"fname\": \"string\",\n      \"lname\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"role\": \"string\"\n    }\n  ],\n  \"_meta\": {\n    \"current_page\": 7456,\n    \"per_page\": 9286,\n    \"total\": 3495\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad5ac1ec-da80-44b1-92de-c4a113722b9f",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "techs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_3]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_4]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per-page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3919e1d5-6ab8-4c03-8979-c7afc0f6515d",
+          "name": "Retrieve a tech",
+          "request": {
+            "name": "Retrieve a tech",
+            "description": {
+              "content": "Retrieves a single technician or user by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "techs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d340421-7bf1-4788-a6ab-6c2ffaa76736",
+              "name": "The requested tech or user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "techs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"fname\": \"string\",\n  \"lname\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\",\n  \"role\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d54b1591-5932-4daf-9e7a-87316a37aaee",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "techs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07ac9c29-9503-45aa-995b-30e87bddad1a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "techs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.servicefusion.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.servicefusion.com/oauth/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.servicefusion.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b6b9c8f5-733e-4562-b460-6cd7367ecea5",
+    "name": "Service Fusion Open Calendar Tasks Techs and Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Service Fusion Open API is a REST/JSON interface to Service Fusion field service management (FSM) software for home-service contractors. It exposes the core operational records - customers and their contacts, jobs (work orders), estimates, invoices, payments, the product/service catalog, technicians, and calendar tasks - over HTTPS. Requests are authenticated with OAuth 2.0; obtain an access token from the token endpoint at https://api.servicefusion.com/oauth/access_token using an authorization_code or client_credentials grant, then send it as a Bearer token. API access is available on the Service Fusion Pro plan and is rate limited to roughly 60 requests per minute.\nGrounding note - customers, jobs, estimates, invoices, and techs are documented resources on the Service Fusion API. Contacts, products, services, payments, and calendar tasks are modeled here from the Service Fusion FSM data model and the platform's read-and-create API conventions; verify exact paths, fields, and available methods against the live reference at https://docs.servicefusion.com/ before production use. In practice the public API is read-and-create heavy - list (GET), retrieve (GET), and create (POST) are the reliably available operations; update (PUT) and delete (DELETE) are not consistently exposed across resources.\n\nContact Support:\n Name: Service Fusion",
+      "type": "text/plain"
+    }
+  }
+}

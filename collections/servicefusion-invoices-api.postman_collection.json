@@ -1,0 +1,658 @@
+{
+  "item": [
+    {
+      "id": "3ba881ca-a4de-45d9-a08a-70582bc6be45",
+      "name": "Invoices",
+      "description": {
+        "content": "Invoices billed to customers for completed work.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a0f2b81-9a82-4484-b6cc-d7f2f2578192",
+          "name": "List invoices",
+          "request": {
+            "name": "List invoices",
+            "description": {
+              "content": "Lists invoices. Filter by status (e.g. open/unpaid) to view outstanding accounts receivable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filters[key_0]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters[key_1]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "Comma-separated list of related resources to inline in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "per-page",
+                  "value": "25",
+                  "description": "Number of records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dd2d523-7aba-4883-b1af-36c561ecb7c4",
+              "name": "A paginated list of invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per-page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"number\": \"string\",\n      \"customer_name\": \"string\",\n      \"status\": \"string\",\n      \"total\": 5297.675276432327,\n      \"balance_due\": 1130.8443328170604,\n      \"line_items\": [\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 6845.892491250197,\n          \"unit_price\": 8566.401441587865,\n          \"taxable\": true\n        },\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 2313.1809431750194,\n          \"unit_price\": 6384.591684856579,\n          \"taxable\": true\n        }\n      ],\n      \"created_at\": \"1987-05-10T06:42:27.319Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"number\": \"string\",\n      \"customer_name\": \"string\",\n      \"status\": \"string\",\n      \"total\": 8171.840089859515,\n      \"balance_due\": 8952.215860151535,\n      \"line_items\": [\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 6572.086107106332,\n          \"unit_price\": 1536.0800187965829,\n          \"taxable\": true\n        },\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 9604.117130974255,\n          \"unit_price\": 5721.08573707774,\n          \"taxable\": false\n        }\n      ],\n      \"created_at\": \"1950-04-14T09:39:49.198Z\"\n    }\n  ],\n  \"_meta\": {\n    \"current_page\": 1630,\n    \"per_page\": 7718,\n    \"total\": 9115\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeb7bf7c-eabb-4752-a618-7aaf335b8a8b",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per-page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39665b2a-c953-4881-8a94-61ee5c507580",
+          "name": "Create an invoice",
+          "request": {
+            "name": "Create an invoice",
+            "description": {
+              "content": "Creates a new invoice for a customer or completed job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_name\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b809be20-9e5f-418d-9fe7-05de58bd8e91",
+              "name": "The created invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_name\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"number\": \"string\",\n  \"customer_name\": \"string\",\n  \"status\": \"string\",\n  \"total\": 9668.817043127734,\n  \"balance_due\": 1399.440937966353,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    }\n  ],\n  \"created_at\": \"1993-10-23T17:03:00.570Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98afb2d1-0b84-4081-80c0-07715db0674c",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_name\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6124d390-4e18-4d5f-88b3-192c78fc76da",
+              "name": "The request body failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_name\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cd848d8-1851-4fd5-b627-47e92162b9b7",
+          "name": "Retrieve an invoice",
+          "request": {
+            "name": "Retrieve an invoice",
+            "description": {
+              "content": "Retrieves a single invoice by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "858deede-c1ae-4aee-a27e-336edffe4405",
+              "name": "The requested invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"number\": \"string\",\n  \"customer_name\": \"string\",\n  \"status\": \"string\",\n  \"total\": 9668.817043127734,\n  \"balance_due\": 1399.440937966353,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit_price\": \"<number>\",\n      \"taxable\": \"<boolean>\"\n    }\n  ],\n  \"created_at\": \"1993-10-23T17:03:00.570Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7b633d7-c7d9-46d2-914c-fd800ddf0b2c",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63221aa8-ca93-4e44-8742-b85a4a0db8f0",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.servicefusion.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.servicefusion.com/oauth/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.servicefusion.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cb711572-fbb8-4a73-951f-d910d9ed44d4",
+    "name": "Service Fusion Open Calendar Tasks Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Service Fusion Open API is a REST/JSON interface to Service Fusion field service management (FSM) software for home-service contractors. It exposes the core operational records - customers and their contacts, jobs (work orders), estimates, invoices, payments, the product/service catalog, technicians, and calendar tasks - over HTTPS. Requests are authenticated with OAuth 2.0; obtain an access token from the token endpoint at https://api.servicefusion.com/oauth/access_token using an authorization_code or client_credentials grant, then send it as a Bearer token. API access is available on the Service Fusion Pro plan and is rate limited to roughly 60 requests per minute.\nGrounding note - customers, jobs, estimates, invoices, and techs are documented resources on the Service Fusion API. Contacts, products, services, payments, and calendar tasks are modeled here from the Service Fusion FSM data model and the platform's read-and-create API conventions; verify exact paths, fields, and available methods against the live reference at https://docs.servicefusion.com/ before production use. In practice the public API is read-and-create heavy - list (GET), retrieve (GET), and create (POST) are the reliably available operations; update (PUT) and delete (DELETE) are not consistently exposed across resources.\n\nContact Support:\n Name: Service Fusion",
+      "type": "text/plain"
+    }
+  }
+}

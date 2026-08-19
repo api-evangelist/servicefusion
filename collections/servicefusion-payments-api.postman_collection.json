@@ -1,0 +1,472 @@
+{
+  "item": [
+    {
+      "id": "c947049e-0680-403c-827d-84f377c6db5c",
+      "name": "Payments",
+      "description": {
+        "content": "Payments applied against invoices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc97ec5d-2c04-4ff8-8576-b7ded64c4520",
+          "name": "List payments",
+          "request": {
+            "name": "List payments",
+            "description": {
+              "content": "Lists payments recorded against invoices.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filters[key_0]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters[key_1]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters[key_2]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters[key_3]",
+                  "value": "<string>",
+                  "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-based page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "per-page",
+                  "value": "25",
+                  "description": "Number of records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "052026dd-2878-4d31-8176-0a5d4f794e27",
+              "name": "A paginated list of payments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_3]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per-page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"invoice_id\": \"string\",\n      \"amount\": 9183.953321227802,\n      \"method\": \"string\",\n      \"date\": \"1981-12-30\"\n    },\n    {\n      \"id\": \"string\",\n      \"invoice_id\": \"string\",\n      \"amount\": 5922.894356008026,\n      \"method\": \"string\",\n      \"date\": \"1979-05-07\"\n    }\n  ],\n  \"_meta\": {\n    \"current_page\": 3401,\n    \"per_page\": 3539,\n    \"total\": 7635\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "904b2c44-7ddf-4865-89de-68179127950f",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters[key_3]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per-page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "107722f2-3f67-4718-9eff-bb8cbd148e29",
+          "name": "Record a payment",
+          "request": {
+            "name": "Record a payment",
+            "description": {
+              "content": "Records a payment applied to an invoice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoice_id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"method\": \"<string>\",\n  \"date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f7b7b9a-0c2c-445a-a398-a223b791cf3d",
+              "name": "The recorded payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoice_id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"method\": \"<string>\",\n  \"date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"invoice_id\": \"string\",\n  \"amount\": 5464.391932937748,\n  \"method\": \"string\",\n  \"date\": \"2017-03-13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5442e41-79b4-48e6-a9bb-6e440e6d3669",
+              "name": "Missing or invalid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoice_id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"method\": \"<string>\",\n  \"date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb850390-cdab-4074-9892-53242495b024",
+              "name": "The request body failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoice_id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"method\": \"<string>\",\n  \"date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.servicefusion.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.servicefusion.com/oauth/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://api.servicefusion.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9d0c7d9f-6b8f-441f-8f46-a176a5ceab66",
+    "name": "Service Fusion Open Calendar Tasks Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Service Fusion Open API is a REST/JSON interface to Service Fusion field service management (FSM) software for home-service contractors. It exposes the core operational records - customers and their contacts, jobs (work orders), estimates, invoices, payments, the product/service catalog, technicians, and calendar tasks - over HTTPS. Requests are authenticated with OAuth 2.0; obtain an access token from the token endpoint at https://api.servicefusion.com/oauth/access_token using an authorization_code or client_credentials grant, then send it as a Bearer token. API access is available on the Service Fusion Pro plan and is rate limited to roughly 60 requests per minute.\nGrounding note - customers, jobs, estimates, invoices, and techs are documented resources on the Service Fusion API. Contacts, products, services, payments, and calendar tasks are modeled here from the Service Fusion FSM data model and the platform's read-and-create API conventions; verify exact paths, fields, and available methods against the live reference at https://docs.servicefusion.com/ before production use. In practice the public API is read-and-create heavy - list (GET), retrieve (GET), and create (POST) are the reliably available operations; update (PUT) and delete (DELETE) are not consistently exposed across resources.\n\nContact Support:\n Name: Service Fusion",
+      "type": "text/plain"
+    }
+  }
+}

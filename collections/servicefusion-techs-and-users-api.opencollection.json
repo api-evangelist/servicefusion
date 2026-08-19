@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Service Fusion Open Calendar Tasks Techs and Users API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.servicefusion.com/oauth/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Techs and Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List techs and users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.servicefusion.com/v1/techs",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Field filters, expressed as filters[field]=value (for example filters[status]=open). Repeat for multiple fields."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "per-page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              }
+            ]
+          },
+          "docs": "Lists the technicians and users in the account."
+        },
+        {
+          "info": {
+            "name": "Retrieve a tech",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.servicefusion.com/v1/techs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single technician or user by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
