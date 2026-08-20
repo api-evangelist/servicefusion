@@ -134,6 +134,8 @@ apis:
   humanURL: https://docs.servicefusion.com/
   baseURL: https://api.servicefusion.com/v1
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
