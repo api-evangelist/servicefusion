@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Service Fusion Open Calendar Tasks API
-  description: 'The Service Fusion Open API is a REST/JSON interface to Service Fusion field service management (FSM) software for home-service contractors. It exposes the core operational records - customers and their contacts, jobs (work orders), estimates, invoices, payments, the product/service catalog, technicians, and calendar tasks - over HTTPS. Requests are authenticated with OAuth 2.0; obtain an access token from the token endpoint at https://api.servicefusion.com/oauth/access_token using an authorization_code or client_credentials grant, then send it as a Bearer token. API access is available on the Service Fusion Pro plan and is rate limited to roughly 60 requests per minute.
-
-    Grounding note - customers, jobs, estimates, invoices, and techs are documented resources on the Service Fusion API. Contacts, products, services, payments, and calendar tasks are modeled here from the Service Fusion FSM data model and the platform''s read-and-create API conventions; verify exact paths, fields, and available methods against the live reference at https://docs.servicefusion.com/ before production use. In practice the public API is read-and-create heavy - list (GET), retrieve (GET), and create (POST) are the reliably available operations; update (PUT) and delete (DELETE) are not consistently exposed across resources.'
+  description: The Service Fusion Open API is a REST/JSON interface to Service Fusion field service management (FSM) software for home-service contractors.
   version: '1.0'
   contact:
     name: Service Fusion
@@ -64,6 +62,23 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    CalendarTask:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        assigned_to:
+          type: string
     CalendarTaskList:
       type: object
       properties:
@@ -82,11 +97,11 @@ components:
           type: integer
         total:
           type: integer
-    CalendarTask:
+    CalendarTaskInput:
       type: object
+      required:
+      - title
       properties:
-        id:
-          type: string
         title:
           type: string
         description:
@@ -106,33 +121,7 @@ components:
           type: string
         message:
           type: string
-    CalendarTaskInput:
-      type: object
-      required:
-      - title
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        start_date:
-          type: string
-          format: date-time
-        end_date:
-          type: string
-          format: date-time
-        assigned_to:
-          type: string
   parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      description: 1-based page number for pagination.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
     PerPage:
       name: per-page
       in: query
@@ -161,6 +150,15 @@ components:
       description: Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests.
       schema:
         type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   responses:
     ValidationError:
       description: The request body failed validation.
