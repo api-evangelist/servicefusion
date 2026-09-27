@@ -58,7 +58,55 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    TechList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tech'
+        _meta:
+          $ref: '#/components/schemas/Pagination'
+    Tech:
+      type: object
+      properties:
+        id:
+          type: string
+        fname:
+          type: string
+        lname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        role:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
   parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
     PerPage:
       name: per-page
       in: query
@@ -96,13 +144,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -116,47 +157,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Pagination:
-      type: object
-      properties:
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
-    TechList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tech'
-        _meta:
-          $ref: '#/components/schemas/Pagination'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Tech:
-      type: object
-      properties:
-        id:
-          type: string
-        fname:
-          type: string
-        lname:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        role:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2

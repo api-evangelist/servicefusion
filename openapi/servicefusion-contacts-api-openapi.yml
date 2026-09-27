@@ -60,26 +60,29 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request body failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Address:
+      type: object
+      properties:
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        state_prov:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
     Contact:
       type: object
       properties:
@@ -99,21 +102,6 @@ components:
           type: string
         address:
           $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      properties:
-        street_1:
-          type: string
-        street_2:
-          type: string
-        city:
-          type: string
-        state_prov:
-          type: string
-        postal_code:
-          type: string
-        country:
-          type: string
     ContactInput:
       type: object
       required:
@@ -149,13 +137,6 @@ components:
           type: integer
         total:
           type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   parameters:
     Id:
       name: id
@@ -164,6 +145,25 @@ components:
       description: The unique identifier of the resource.
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
