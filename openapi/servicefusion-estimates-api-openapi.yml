@@ -83,35 +83,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    EstimateList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Estimate'
-        _meta:
-          $ref: '#/components/schemas/Pagination'
-    LineItem:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        quantity:
-          type: number
-        unit_price:
-          type: number
-        taxable:
-          type: boolean
     Estimate:
       type: object
       properties:
@@ -132,6 +103,13 @@ components:
         created_at:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     EstimateInput:
       type: object
       required:
@@ -143,6 +121,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineItem'
+    EstimateList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Estimate'
+        _meta:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -152,7 +139,62 @@ components:
           type: integer
         total:
           type: integer
+    LineItem:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: number
+        unit_price:
+          type: number
+        taxable:
+          type: boolean
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    Expand:
+      name: expand
+      in: query
+      required: false
+      description: Comma-separated list of related resources to inline in the response.
+      schema:
+        type: string
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests.
+      schema:
+        type: string
     Id:
       name: id
       in: path
@@ -181,48 +223,6 @@ components:
         type: object
         additionalProperties:
           type: string
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests.
-      schema:
-        type: string
-    Expand:
-      name: expand
-      in: query
-      required: false
-      description: Comma-separated list of related resources to inline in the response.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      description: 1-based page number for pagination.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request body failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

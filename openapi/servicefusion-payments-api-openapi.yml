@@ -62,6 +62,15 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    PaymentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        _meta:
+          $ref: '#/components/schemas/Pagination'
     Error:
       type: object
       properties:
@@ -69,6 +78,20 @@ components:
           type: string
         message:
           type: string
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        invoice_id:
+          type: string
+        amount:
+          type: number
+        method:
+          type: string
+        date:
+          type: string
+          format: date
     PaymentInput:
       type: object
       required:
@@ -84,29 +107,6 @@ components:
         date:
           type: string
           format: date
-    Payment:
-      type: object
-      properties:
-        id:
-          type: string
-        invoice_id:
-          type: string
-        amount:
-          type: number
-        method:
-          type: string
-        date:
-          type: string
-          format: date
-    PaymentList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-        _meta:
-          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -117,6 +117,22 @@ components:
         total:
           type: integer
   parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: 1-based page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests.
+      schema:
+        type: string
     PerPage:
       name: per-page
       in: query
@@ -138,31 +154,15 @@ components:
         type: object
         additionalProperties:
           type: string
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Sort field, optionally prefixed with - for descending order (for example sort=-start_date). Required on /jobs list requests.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      description: 1-based page number for pagination.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
-    ValidationError:
-      description: The request body failed validation.
+    Unauthorized:
+      description: Missing or invalid OAuth 2.0 access token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid OAuth 2.0 access token.
+    ValidationError:
+      description: The request body failed validation.
       content:
         application/json:
           schema:

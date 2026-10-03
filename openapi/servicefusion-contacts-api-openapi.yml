@@ -61,6 +61,23 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    ContactInput:
+      type: object
+      required:
+      - fname
+      properties:
+        fname:
+          type: string
+        lname:
+          type: string
+        contact_type:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
     Error:
       type: object
       properties:
@@ -102,32 +119,6 @@ components:
           type: string
         address:
           $ref: '#/components/schemas/Address'
-    ContactInput:
-      type: object
-      required:
-      - fname
-      properties:
-        fname:
-          type: string
-        lname:
-          type: string
-        contact_type:
-          type: string
-        phone:
-          type: string
-        email:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
-    ContactList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        _meta:
-          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -137,14 +128,15 @@ components:
           type: integer
         total:
           type: integer
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
+    ContactList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        _meta:
+          $ref: '#/components/schemas/Pagination'
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -164,6 +156,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2
