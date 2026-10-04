@@ -215,6 +215,9 @@ apis:
   - type: OpenCollection
     url: collections/servicefusion.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/servicefusion-capability-edges.yml
+  name: Service Fusion Business Capability Map
 - type: AgenticAccess
   url: agentic-access/servicefusion-agentic-access.yml
 - type: DomainSecurity
