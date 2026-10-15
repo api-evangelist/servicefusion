@@ -1,15 +1,85 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/servicefusion-openapi.yml
-docs: https://docs.servicefusion.com/
-note: Service Fusion's OAuth 2.0 implementation (authorization_code and client_credentials
-  grants per the official RAML definition at https://docs.servicefusion.com/, and the
-  Connected Apps guide at https://servicefusion.zendesk.com/hc/en-us/articles/360039138891)
-  does not define or document any scopes; access is controlled per connected app via
-  its client credentials, not via granular OAuth scopes.
+generated: '2026-10-14'
+method: none
+source: openapi/servicefusion-calendar-tasks-api-openapi.yml, openapi/servicefusion-contacts-api-openapi.yml,
+  openapi/servicefusion-customers-api-openapi.yml, openapi/servicefusion-estimates-api-openapi.yml,
+  openapi/servicefusion-invoices-api-openapi.yml, openapi/servicefusion-jobs-api-openapi.yml,
+  openapi/servicefusion-payments-api-openapi.yml, openapi/servicefusion-products-and-services-api-openapi.yml,
+  openapi/servicefusion-techs-and-users-api-openapi.yml
 schemes:
 - name: oauth2
-  source: openapi/servicefusion-openapi.yml
+  source: openapi/servicefusion-calendar-tasks-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-contacts-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-customers-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-estimates-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-invoices-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-jobs-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-payments-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-products-and-services-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.servicefusion.com/oauth/authorize
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  - flow: clientCredentials
+    tokenUrl: https://api.servicefusion.com/oauth/access_token
+  description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
+- name: oauth2
+  source: openapi/servicefusion-techs-and-users-api-openapi.yml
   flows:
   - flow: authorizationCode
     authorizationUrl: https://api.servicefusion.com/oauth/authorize
@@ -18,3 +88,5 @@ schemes:
     tokenUrl: https://api.servicefusion.com/oauth/access_token
   description: OAuth 2.0. Access tokens are issued at https://api.servicefusion.com/oauth/access_token.
 scopes: []
+note: The OAuth2 security scheme(s) in the OpenAPI declare no scopes, and no security requirement
+  references one.
