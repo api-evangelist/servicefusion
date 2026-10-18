@@ -39,6 +39,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/servicefusion.png
 tags:
+- Field Service
+- Home Services
+- Contractors
+- Scheduling
+- Dispatch
+- Invoicing
+tags_raw:
 - Field Service Management
 - FSM
 - Home Services
